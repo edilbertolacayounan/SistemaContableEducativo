@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Propuesta 3 - Sistema Contable Educativo</title>
+    <link rel="stylesheet" href="propuesta3.css">
+</head>
+<body>
+    <nav class="nav-principal">
+        <div class="nav-contenedor">
+            <span class="titulo-nav">Sistema Contable Educativo</span>
+            <div class="nav-pestanas">
+                <button class="boton-pestana activa" data-seccion="inicio">Inicio</button>
+                <button class="boton-pestana" data-seccion="cuentas">Cuentas</button>
+                <button class="boton-pestana" data-seccion="movimientos">Movimientos</button>
+                <button class="boton-pestana" data-seccion="diario">Libro Diario</button>
+                <button class="boton-pestana" data-seccion="mayor">Libro Mayor</button>
+                <button class="boton-pestana" data-seccion="resultados">Resultados</button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="contenido">
+        <section id="inicio" class="seccion visible">
+            <div class="tarjeta">
+                <h1>Bienvenido a Propuesta 3</h1>
+                <p>Esta versión simple permite crear cuentas ilimitadas, registrar varios movimientos por cuenta, generar el libro diario y el libro mayor, y mostrar resultados con gráficos.</p>
+                <h2>Uso básico</h2>
+                <ol>
+                    <li>Ve a la pestaña <strong>Cuentas</strong> y agrega tus cuentas.</li>
+                    <li>Ve a <strong>Movimientos</strong> para armar un asiento con líneas de Debe y Haber.</li>
+                    <li>Registra el asiento cuando cuadre y revisa el <strong>Libro Diario</strong> y el <strong>Libro Mayor</strong>.</li>
+                    <li>En <strong>Resultados</strong> verás cifras, estado y un gráfico de saldos.</li>
+                </ol>
+            </div>
+        </section>
+
+        <section id="cuentas" class="seccion oculto">
+            <div class="tarjeta">
+                <h2>Crear cuentas</h2>
+                <p>Ingresa cada cuenta con su tipo y naturaleza. No hay límite fijo, puedes crear varias.</p>
+                <div class="form-rejilla">
+                    <div class="grupo">
+                        <label for="cuenta-nombre">Nombre de la cuenta</label>
+                        <input id="cuenta-nombre" type="text" placeholder="Ej. Caja, Ventas, Compras">
+                    </div>
+                    <div class="grupo">
+                        <label for="cuenta-tipo">Tipo de cuenta</label>
+                        <select id="cuenta-tipo">
+                            <option value="">Seleccione tipo</option>
+                            <option value="Activo">Activo</option>
+                            <option value="Pasivo">Pasivo</option>
+                            <option value="Patrimonio">Patrimonio</option>
+                            <option value="Ingreso">Ingreso</option>
+                            <option value="Costo">Costo</option>
+                            <option value="Gasto">Gasto</option>
+                        </select>
+                    </div>
+                    <div class="grupo">
+                        <label for="cuenta-naturaleza">Naturaleza</label>
+                        <select id="cuenta-naturaleza">
+                            <option value="">Seleccione naturaleza</option>
+                            <option value="Deudora">Deudora</option>
+                            <option value="Acreedora">Acreedora</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="grupo-botones">
+                    <button id="boton-agregar-cuenta" class="boton boton-primario">Agregar cuenta</button>
+                    <button id="boton-limpiar-cuentas" class="boton boton-secundario">Limpiar formulario</button>
+                </div>
+                <p id="mensaje-cuenta" class="mensaje"></p>
+                <div class="tabla-datos">
+                    <div class="fila encabezado"><span>Cuenta</span><span>Tipo</span><span>Naturaleza</span><span>Acción</span></div>
+                    <div id="lista-cuentas"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="movimientos" class="seccion oculto">
+            <div class="tarjeta">
+                <h2>Registrar movimientos</h2>
+                <p>Arma un asiento con líneas. Debe y Haber deben ser iguales para registrar.</p>
+                <div class="form-rejilla">
+                    <div class="grupo">
+                        <label for="entrada-fecha">Fecha</label>
+                        <input id="entrada-fecha" type="date">
+                    </div>
+                    <div class="grupo grande">
+                        <label for="entrada-descripcion">Descripción del asiento</label>
+                        <input id="entrada-descripcion" type="text" placeholder="Ej. Venta al contado">
+                    </div>
+                </div>
+                <div class="grupo linea-movimiento">
+                    <label>Línea de movimiento</label>
+                    <div class="fila-movimiento">
+                        <select id="mov-cuenta"><option value="">Elige una cuenta</option></select>
+                        <select id="mov-tipo">
+                            <option value="Debe">Debe</option>
+                            <option value="Haber">Haber</option>
+                        </select>
+                        <input id="mov-monto" type="number" min="0" step="0.01" placeholder="Monto">
+                        <button id="boton-agregar-linea" class="boton boton-primario">Agregar línea</button>
+                    </div>
+                </div>
+                <div class="movimientos-actuales">
+                    <h3>Líneas del asiento</h3>
+                    <div id="lista-lineas"></div>
+                </div>
+                <div class="grupo-botones">
+                    <button id="boton-registrar-asiento" class="boton boton-primario">Registrar asiento</button>
+                    <button id="boton-limpiar-asiento" class="boton boton-secundario">Limpiar asiento</button>
+                </div>
+                <div class="resumen-asiento">
+                    <div><strong>Total Debe:</strong> <span id="total-debe">$0.00</span></div>
+                    <div><strong>Total Haber:</strong> <span id="total-haber">$0.00</span></div>
+                    <div><strong>Diferencia:</strong> <span id="total-diferencia">$0.00</span></div>
+                </div>
+                <p id="mensaje-asiento" class="mensaje"></p>
+            </div>
+        </section>
+
+        <section id="diario" class="seccion oculto">
+            <div class="tarjeta">
+                <h2>Libro Diario</h2>
+                <p>Los asientos registrados aparecen aquí con su fecha, descripción y líneas.</p>
+                <div id="lista-diario"></div>
+                <p id="mensaje-diario" class="mensaje"></p>
+            </div>
+        </section>
+
+        <section id="mayor" class="seccion oculto">
+            <div class="tarjeta">
+                <h2>Libro Mayor</h2>
+                <p>Cada cuenta muestra sus movimientos, totales y saldo según la naturaleza.</p>
+                <div class="tabla-datos mayor-tabla">
+                    <div class="fila encabezado"><span>Cuenta</span><span>Debe</span><span>Haber</span><span>Saldo</span><span>Tipo</span></div>
+                    <div id="lista-mayor"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="resultados" class="seccion oculto">
+            <div class="tarjeta">
+                <h2>Resultados</h2>
+                <p>Analiza el estado de tus registros y observa un gráfico de saldos.</p>
+                <div class="resultado-final">
+                    <div><strong>Cuentas creadas:</strong> <span id="resultado-cuentas">0</span></div>
+                    <div><strong>Asientos registrados:</strong> <span id="resultado-asientos">0</span></div>
+                    <div><strong>Total Debe:</strong> <span id="resultado-debe">$0.00</span></div>
+                    <div><strong>Total Haber:</strong> <span id="resultado-haber">$0.00</span></div>
+                    <div><strong>Estado del diario:</strong> <span id="resultado-estado">Sin datos</span></div>
+                </div>
+                <div class="grafico-contenedor">
+                    <h3>Gráfico de saldos por cuenta</h3>
+                    <canvas id="grafico-mayor" width="760" height="300"></canvas>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="propuesta3.js"></script>
+</body>
+</html>
