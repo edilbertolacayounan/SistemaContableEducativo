@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Propuesta 2 - Sistema Contable Educativo</title>
+    <link rel="stylesheet" href="propuesta2.css">
+</head>
+<body>
+    <nav class="nav-principal">
+        <div class="nav-contenedor">
+            <span class="titulo-nav">Sistema Contable Educativo</span>
+            <div class="nav-pestanas">
+                <button class="boton-pestana activa" data-seccion="inicio">Inicio</button>
+                <button class="boton-pestana" data-seccion="cuentas">Cuentas</button>
+                <button class="boton-pestana" data-seccion="movimientos">Movimientos</button>
+                <button class="boton-pestana" data-seccion="resultados">Resultados</button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="contenido">
+        <section id="inicio" class="seccion visible">
+            <div class="tarjeta">
+                <h1>Bienvenido</h1>
+                <p>Esta versión simple reúne todo en una sola página usando pestañas.
+                No carga ejercicios al iniciar. Tú decides las cuentas y los movimientos.
+                Aprende el flujo de contabilidad con una interfaz limpia y sin estructuras complejas.</p>
+                <h2>Cómo usar</h2>
+                <ol>
+                    <li>Ve a la pestaña <strong>Cuentas</strong> y escribe hasta tres cuentas.</li>
+                    <li>Ve a <strong>Movimientos</strong> y registra hasta tres líneas con Debe o Haber.</li>
+                    <li>En <strong>Resultados</strong> verás si la contabilidad cuadra y los totales.</li>
+                </ol>
+            </div>
+        </section>
+
+        <section id="cuentas" class="seccion oculto">
+            <div class="tarjeta">
+                <h2>Catálogo de cuentas</h2>
+                <p>Ingresa nombres, tipo y naturaleza de cada cuenta. Solo se usan variables simples.</p>
+                <div class="form-grid">
+                    <div class="grupo">
+                        <label for="cuenta-1-nombre">Cuenta 1</label>
+                        <input id="cuenta-1-nombre" type="text" placeholder="Ej. Caja">
+                        <select id="cuenta-1-tipo">
+                            <option value="">Tipo</option>
+                            <option value="Activo">Activo</option>
+                            <option value="Pasivo">Pasivo</option>
+                            <option value="Patrimonio">Patrimonio</option>
+                            <option value="Ingreso">Ingreso</option>
+                            <option value="Costo">Costo</option>
+                            <option value="Gasto">Gasto</option>
+                        </select>
+                        <select id="cuenta-1-naturaleza">
+                            <option value="">Naturaleza</option>
+                            <option value="deudora">Deudora</option>
+                            <option value="acreedora">Acreedora</option>
+                        </select>
+                    </div>
+                    <div class="grupo">
+                        <label for="cuenta-2-nombre">Cuenta 2</label>
+                        <input id="cuenta-2-nombre" type="text" placeholder="Ej. Ventas">
+                        <select id="cuenta-2-tipo">
+                            <option value="">Tipo</option>
+                            <option value="Activo">Activo</option>
+                            <option value="Pasivo">Pasivo</option>
+                            <option value="Patrimonio">Patrimonio</option>
+                            <option value="Ingreso">Ingreso</option>
+                            <option value="Costo">Costo</option>
+                            <option value="Gasto">Gasto</option>
+                        </select>
+                        <select id="cuenta-2-naturaleza">
+                            <option value="">Naturaleza</option>
+                            <option value="deudora">Deudora</option>
+                            <option value="acreedora">Acreedora</option>
+                        </select>
+                    </div>
+                    <div class="grupo">
+                        <label for="cuenta-3-nombre">Cuenta 3</label>
+                        <input id="cuenta-3-nombre" type="text" placeholder="Ej. Compras">
+                        <select id="cuenta-3-tipo">
+                            <option value="">Tipo</option>
+                            <option value="Activo">Activo</option>
+                            <option value="Pasivo">Pasivo</option>
+                            <option value="Patrimonio">Patrimonio</option>
+                            <option value="Ingreso">Ingreso</option>
+                            <option value="Costo">Costo</option>
+                            <option value="Gasto">Gasto</option>
+                        </select>
+                        <select id="cuenta-3-naturaleza">
+                            <option value="">Naturaleza</option>
+                            <option value="deudora">Deudora</option>
+                            <option value="acreedora">Acreedora</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="grupo-botones">
+                    <button id="boton-actualizar-cuentas" class="boton boton-primario">Actualizar cuentas</button>
+                    <button id="boton-limpiar-cuentas" class="boton boton-secundario">Limpiar cuentas</button>
+                </div>
+                <div class="tabla-simple" id="tabla-catalogo">
+                    <div class="fila tabla-encabezado">
+                        <span>Nombre</span><span>Tipo</span><span>Naturaleza</span>
+                    </div>
+                    <div class="fila" id="fila-cuenta-1"><span></span><span></span><span></span></div>
+                    <div class="fila" id="fila-cuenta-2"><span></span><span></span><span></span></div>
+                    <div class="fila" id="fila-cuenta-3"><span></span><span></span><span></span></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="movimientos" class="seccion oculto">
+            <div class="tarjeta">
+                <h2>Registro de movimientos</h2>
+                <p>Registra hasta tres líneas y revisa la partida doble.</p>
+                <div class="form-grid-movimientos">
+                    <div class="grupo-movimiento">
+                        <label for="mov-cuenta-1">Línea 1</label>
+                        <select id="mov-cuenta-1"><option value="">Elige una cuenta</option></select>
+                        <select id="mov-tipo-1">
+                            <option value="debe">Debe</option>
+                            <option value="haber">Haber</option>
+                        </select>
+                        <input id="mov-monto-1" type="number" min="0" step="0.01" placeholder="0.00">
+                    </div>
+                    <div class="grupo-movimiento">
+                        <label for="mov-cuenta-2">Línea 2</label>
+                        <select id="mov-cuenta-2"><option value="">Elige una cuenta</option></select>
+                        <select id="mov-tipo-2">
+                            <option value="debe">Debe</option>
+                            <option value="haber">Haber</option>
+                        </select>
+                        <input id="mov-monto-2" type="number" min="0" step="0.01" placeholder="0.00">
+                    </div>
+                    <div class="grupo-movimiento">
+                        <label for="mov-cuenta-3">Línea 3</label>
+                        <select id="mov-cuenta-3"><option value="">Elige una cuenta</option></select>
+                        <select id="mov-tipo-3">
+                            <option value="debe">Debe</option>
+                            <option value="haber">Haber</option>
+                        </select>
+                        <input id="mov-monto-3" type="number" min="0" step="0.01" placeholder="0.00">
+                    </div>
+                </div>
+                <div class="grupo-botones">
+                    <button id="boton-calcular-movimientos" class="boton boton-primario">Calcular totales</button>
+                    <button id="boton-limpiar-movimientos" class="boton boton-secundario">Limpiar líneas</button>
+                </div>
+                <div class="indicador-movimientos">
+                    <div><strong>Total Debe:</strong> <span id="total-debe">$0.00</span></div>
+                    <div><strong>Total Haber:</strong> <span id="total-haber">$0.00</span></div>
+                    <div><strong>Diferencia:</strong> <span id="total-diferencia">$0.00</span></div>
+                </div>
+                <p id="mensaje-movimiento" class="mensaje"></p>
+            </div>
+        </section>
+
+        <section id="resultados" class="seccion oculto">
+            <div class="tarjeta">
+                <h2>Resultados</h2>
+                <p>Visualiza si la contabilidad cuadra y las sumas finales.</p>
+                <div class="resultado-final">
+                    <div><strong>Debe total:</strong> <span id="final-debe">$0.00</span></div>
+                    <div><strong>Haber total:</strong> <span id="final-haber">$0.00</span></div>
+                    <div><strong>Diferencia:</strong> <span id="final-diferencia">$0.00</span></div>
+                    <div><strong>Estado:</strong> <span id="final-estado">Sin datos</span></div>
+                </div>
+                <button id="boton-actualizar-resultados" class="boton boton-primario">Actualizar resultados</button>
+            </div>
+        </section>
+    </main>
+
+    <script src="propuesta2.js"></script>
+</body>
+</html>
